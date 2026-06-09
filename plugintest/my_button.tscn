@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://k6duam7iuad6"]
+
+[ext_resource type="Script" uid="uid://bh5eavbwn1m85" path="res://addons/stagedshadows/stagedshadowlight.gd" id="1_7xpg2"]
+[ext_resource type="Script" uid="uid://dri02o6u7uvms" path="res://addons/stagedshadows/my_button.gd" id="1_as87b"]
+[ext_resource type="PackedScene" uid="uid://bdoohmn8uxjpx" path="res://characters/staged_player.tscn" id="3_sv1mp"]
+[ext_resource type="PackedScene" uid="uid://c6725ut0wmf7t" path="res://characters/player.tscn" id="5_b2lok"]
+
+[sub_resource type="Gradient" id="Gradient_7xpg2"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_b2lok"]
+gradient = SubResource("Gradient_7xpg2")
+
+[node name="Node2D" type="Node2D"]
+rotation = -0.08700565
+
+[node name="StagedShadowLight" type="DirectionalLight2D" parent="."]
+position = Vector2(0, 231)
+rotation = 3.656048
+energy = 0.0
+blend_mode = 1
+shadow_color = Color(0, 0, 0, 0.827451)
+height = 0.63
+script = ExtResource("1_7xpg2")
+luzdir = Vector3(4.76, -3.025, 0)
+luzdir2d = null
+metadata/_custom_type_script = "uid://bh5eavbwn1m85"
+
+[node name="MyButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_as87b")
+metadata/_custom_type_script = "uid://dri02o6u7uvms"
+
+[node name="DirectionalLight2D2" type="DirectionalLight2D" parent="."]
+visible = false
+position = Vector2(0, 231)
+rotation = 0.040771287
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_b2lok")]
+visible = false
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.6627451)
+height = 1.0
+
+[node name="StagedCharacterBody2D2" parent="." node_paths=PackedStringArray("luz") instance=ExtResource("3_sv1mp")]
+position = Vector2(1000.0011, -176.00235)
+scale = Vector2(1.0000421, 1.0000421)
+luz = NodePath("../StagedShadowLight")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, 231)
+energy = 3.06
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.8509804)
+texture = SubResource("GradientTexture1D_b2lok")
+height = 338.0
+
+[connection signal="property_list_changed" from="StagedShadowLight" to="StagedShadowLight" method="_on_property_list_changed"]

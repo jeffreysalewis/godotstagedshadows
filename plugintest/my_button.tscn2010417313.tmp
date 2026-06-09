@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://k6duam7iuad6"]
+
+[ext_resource type="Script" uid="uid://dri02o6u7uvms" path="res://addons/stagedshadows/my_button.gd" id="1_as87b"]
+[ext_resource type="Script" uid="uid://exhandxftbgc" path="res://addons/stagedshadows/stagedgroundshadows.gd" id="1_sv1mp"]
+[ext_resource type="PackedScene" uid="uid://c6725ut0wmf7t" path="res://characters/player.tscn" id="5_b2lok"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="StagedGroundShadow" type="Node2D" parent="." node_paths=PackedStringArray("cha")]
+script = ExtResource("1_sv1mp")
+cha = NodePath("../CharacterBody2D")
+metadata/_custom_type_script = "uid://exhandxftbgc"
+
+[node name="MyButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+script = ExtResource("1_as87b")
+metadata/_custom_type_script = "uid://dri02o6u7uvms"
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("5_b2lok")]
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 0.6627451)
+height = 1.0
